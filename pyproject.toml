@@ -11,6 +11,9 @@ requires-python = ">=3.13,<4.0"
 authors = [
   { name = "Notorios TI" }
 ]
+
+packages = [{ include = "meli_token_manager", from = "src" }]
+
 dependencies = [
   "requests>=2.31.0",
   "google-cloud-secret-manager",
