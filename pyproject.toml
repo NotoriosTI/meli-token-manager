@@ -13,7 +13,7 @@ authors = [
 ]
 dependencies = [
   "requests>=2.31.0",
-  "google-cloud-secretmanager>=2.20.0",
+  "google-cloud-secret-manager",
   "env-manager @ git+https://github.com/NotoriosTI/libraries.git@main#subdirectory=env-manager"
 ]
 
@@ -25,6 +25,3 @@ dev = [
 
 [project.scripts]
 meli-token-rotate = "meli_token_manager.cli:main"
-
-[tool.hatch.metadata]
-allow-direct-references = true
