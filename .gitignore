@@ -1,0 +1,17 @@
+.env*
+*dotenv*
+.venv
+.pytest_cache/
+.langgraph_api*
+__pycache__/
+src/production_expert/__pycache__/
+poetry.lock
+libraries/
+*.toml.backup
+switch_branch
+/ssh
+.DS_Store
+langgraph.json
+**/vector_store/index.*
+config_vars.yaml
+tokens.json

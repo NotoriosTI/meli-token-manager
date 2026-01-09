@@ -1,0 +1,43 @@
+variables:
+  MELI_APP_ID:
+    source: MELI_APP_ID
+    type: str
+
+  MELI_CLIENT_SECRET:
+    source: MELI_CLIENT_SECRET
+    type: str
+
+  MELI_REFRESH_TOKEN:
+    source: MELI_REFRESH_TOKEN
+    type: str
+    default: ""  # optional: used only if you preload a refresh token
+
+  MELI_REDIRECT_URI:
+    source: MELI_REDIRECT_URI
+    type: str
+
+  MELI_TOKENS_SECRET_NAME:
+    source: MELI_TOKENS_SECRET_NAME
+    type: str
+
+  GCP_PROJECT_ID:
+    source: GCP_PROJECT_ID
+    type: str
+
+  MELI_TOKEN_FILE:
+    source: MELI_TOKEN_FILE
+    type: str
+    default: "tokens.json"
+
+  ROTATION_INTERVAL_SECONDS:
+    source: ROTATION_INTERVAL_SECONDS
+    type: int
+    default: 14400  # 4 hours to stay ahead of the 6h expiry window
+
+validation:
+  required:
+    - MELI_APP_ID
+    - MELI_CLIENT_SECRET
+    - MELI_REDIRECT_URI
+    - MELI_TOKENS_SECRET_NAME
+    - GCP_PROJECT_ID
