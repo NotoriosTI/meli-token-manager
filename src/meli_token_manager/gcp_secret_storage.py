@@ -46,11 +46,11 @@ class GCPSecretStorage:
             parent=self._secret_path(secret_name),
             payload=secretmanager.SecretPayload(data=payload),
         )
-        self._disable_prior_versions(secret_name, keep_version=response.name)
+        self._destroy_prior_versions(secret_name, keep_version=response.name)
         return response.name
 
-    def _disable_prior_versions(self, secret_name: str, keep_version: str) -> None:
-        """Disable all other versions to avoid serving stale tokens."""
+    def _destroy_prior_versions(self, secret_name: str, keep_version: str) -> None:
+        """Destroy all other versions to avoid serving stale tokens and reduce cost."""
 
         parent = self._secret_path(secret_name)
         try:
@@ -61,11 +61,12 @@ class GCPSecretStorage:
         for version in versions:
             if version.name == keep_version:
                 continue
-            if version.state == secretmanager.SecretVersion.State.ENABLED:
-                try:
-                    self._client.disable_secret_version(name=version.name)
-                except gcp_exceptions.GoogleAPICallError:
-                    continue
+            if version.state == secretmanager.SecretVersion.State.DESTROYED:
+                continue
+            try:
+                self._client.destroy_secret_version(name=version.name)
+            except gcp_exceptions.GoogleAPICallError:
+                continue
 
     def read_secret(self, secret_name: str) -> Optional[str]:
         """Read the latest version of a secret if it exists."""

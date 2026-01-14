@@ -136,7 +136,7 @@ class TokenRotator:
         self._secret_storage.write_secret(
             self._tokens_secret_name, json.dumps(token_data, indent=2).encode("utf-8")
         )
-        logger.info("Tokens refreshed; latest version enabled and prior versions disabled in GCP")
+        logger.info("Tokens refreshed; latest version stored and prior versions destroyed in GCP")
         return token_data
 
     def run_forever(self, *, interval_seconds: Optional[int] = None) -> None:
